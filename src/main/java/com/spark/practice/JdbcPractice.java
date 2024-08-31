@@ -10,7 +10,7 @@ public class JdbcPractice {
 
 	public static void main(String[] args) {
 		try (final var spark = SparkSession.builder().appName("Jdbc Practice").master("local[*]").getOrCreate()) {
-			final var empDs = spark.read().jdbc(getDbProperties().getProperty("connectionURL"), "employee",
+			final var empDs = spark.read().jdbc(getDbProperties().getProperty("url"), "employee",
 					getDbProperties());
 			empDs.show();
 
@@ -25,7 +25,7 @@ public class JdbcPractice {
 			Dataset<Row> sql = spark.sql("select dno, count(dno) from emp group by dno");
 			sql.show();
 
-			final var deptDs = spark.read().jdbc(getDbProperties().getProperty("connectionURL"), "department",
+			final var deptDs = spark.read().jdbc(getDbProperties().getProperty("url"), "department",
 					getDbProperties());
 			deptDs.show();
 
@@ -43,7 +43,7 @@ public class JdbcPractice {
 
 	public static Properties getDbProperties() {
 		Properties dbProps = new Properties();
-		dbProps.setProperty("connectionURL", "jdbc:postgresql://localhost:5432/nlcd-prep");
+		dbProps.setProperty("url", "jdbc:postgresql://localhost:5432/nlcd-prep");
 		dbProps.setProperty("driver", "org.postgresql.Driver");
 		dbProps.setProperty("user", "postgres");
 		dbProps.setProperty("password", "password");

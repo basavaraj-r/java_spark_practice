@@ -3,6 +3,7 @@ package com.spark.practice;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 
 public class FileTypes {
@@ -17,7 +18,7 @@ public class FileTypes {
 				stdDir.delete();
 			}
 
-			stdData.write().parquet(stdDir.getPath());
+			stdData.write().mode(SaveMode.Overwrite).parquet(stdDir.getPath());
 			final var student = spark.read().parquet(stdDir.getPath());
 			student.show();
 		}
