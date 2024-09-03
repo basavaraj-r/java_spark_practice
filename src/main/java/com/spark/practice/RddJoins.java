@@ -46,6 +46,10 @@ public class RddJoins {
 			System.out.println("\nFull outer join: \n");
 			JavaPairRDD<String, Tuple2<Optional<Customer>, Optional<Order>>> fjoinRdd = custRdd.fullOuterJoin(ordRdd);
 			fjoinRdd.take(10).forEach(System.out::println);
+			
+			System.out.println("\nCartesian join: \n");
+			JavaPairRDD<Tuple2<String, Customer>, Tuple2<String, Order>> cjoinRdd = custRdd.cartesian(ordRdd);
+			cjoinRdd.take(15).forEach(System.out::println);
 		}
 		
 	}
