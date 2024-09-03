@@ -64,7 +64,7 @@ public class SaveModeCsv {
 		try (final var con = DriverManager.getConnection(getDbProperties().getProperty("url"), getDbProperties())) {
 			final var statement = con.createStatement();
 			statement.execute("drop table if exists " + tableName);
-			System.out.println(tableName + " table drop successful.");
+			System.out.println(tableName + " table dropped successfully.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
